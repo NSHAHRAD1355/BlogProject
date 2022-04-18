@@ -11,7 +11,7 @@ use App\Post;
 class PostController extends Controller
 {
     public function index(){
-        $posts = Post::get();
+        $posts = Post::paginate(5);
         return view('posts.index',compact("posts"));
 
     }
@@ -46,6 +46,11 @@ class PostController extends Controller
         return redirect('posts');
 
 
+    }
+
+    public function destroy(Post $post){
+        $post->delete();
+        return redirect('posts');
     }
 
 }
