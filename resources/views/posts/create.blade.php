@@ -17,6 +17,12 @@
                 <br>
             </form>
 
+            @if ($errors->any())
+                @foreach($errors->all() as $error)
+                {{ $error }}<br>
+                @endforeach
+            @endif
+
 
         </div>
         <div class="col-md-2"></div>

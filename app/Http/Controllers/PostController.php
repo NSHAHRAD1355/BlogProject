@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Http\Requests\PostRequest;
 
 use Illuminate\Http\Request;
 use App\Http\Requests;
@@ -20,7 +21,7 @@ class PostController extends Controller
 
     }
 
-    public function store(Request $request){
+    public function store(PostRequest $request){
         $formData = $request->all();
         Post::create($formData);
         return redirect('posts');
@@ -30,6 +31,21 @@ class PostController extends Controller
     public function show($post){
         $post = Post::find($post);
         return view('posts.show',compact('post'));
+    }
+
+    public function edit($post){
+        $post = Post::findOrFail($post);
+
+        return view('posts.edit', compact("post"));
+    }
+
+    public function update(PostRequest $request , $post){
+        $formdata = $request->all();
+        $post = Post::findOrFail($post);
+        $post->update($formdata);
+        return redirect('posts');
+
+
     }
 
 }
