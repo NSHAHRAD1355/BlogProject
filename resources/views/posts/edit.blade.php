@@ -15,13 +15,15 @@
                     <textarea  type="text" id="message" name="body" class="form-control">{{$post->body}}</textarea><br>
                     <input type="submit" value="Update" class="btn btn-success btn-lg btn-block" style="margin-top:20px">
                     <br>
+                    <label for="category_id">Category</label>
+                    <select name="category_id">
+                        @foreach($categories as $id => $category)
+                            <option value="{{$id}}">{{$category}}</option>
+                        @endforeach
+                    </select><br>
                 </form>
 
-                @if ($errors->any())
-                    @foreach($errors->all() as $error)
-                        {{ $error }}<br>
-                    @endforeach
-                @endif
+                @include('partial.displayErrors')
 
 
 

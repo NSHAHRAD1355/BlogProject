@@ -17,6 +17,8 @@
                     <th>#</th>
                     <th>Title</th>
                     <th>Body</th>
+                    <th>Category</th>
+                    <th>Tag</th>
                     <th>Created At</th>
                     <th></th>
                 </thead>
@@ -26,15 +28,23 @@
                         <th>{{$post->id}}</th>
                         <td>{{$post->title}}</td>
                         <td>{{ substr($post->body ,0,100)}}{{strlen($post->body) > 100 ? "..." : ""}}</td>
+                        <td>{{$post->category['name']}}</td>
+{{--                        {{ !empty($post->category) ? $post->category->name:'' }}--}}
+                        <td>
+                            @foreach($post->tags as $tag)
+                                {{$tag->name}}
+                            @endforeach
+
+                        </td>
                         <td>{{$post->created_at}}</td>
-                        <td><a href="{{route('posts.show',$post->id)}}" class="btn btn-default">view</a><a href="{{route('posts.edit',$post->id)}}" class="btn btn-default">Edit</a>  </td>
+                        <td><a href="{{route('posts.show',$post->id)}}" class="btn btn-default">view</a><a href="{{route('posts.edit',$post->id)}}" class="btn btn-default">Edit</a>  <a href="{{route('posts.destroy',$post->id)}}" class="btn btn-default">Delete</a> </td>
                     </tr>
 
                 @endforeach
 
                 </tbody>
             </table>
-            {{ $posts->links() }}
+            {{$posts->links()}}
         </div>
     </div>
 

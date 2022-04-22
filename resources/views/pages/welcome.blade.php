@@ -17,37 +17,26 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-8" style="background-color: beige">
+        <div class="col-md-12" style="background-color: beige">
+            @foreach($posts as $post)
 
-         <div class="post">
-             <h3>Post Title</h3>
-             <p>Get started with Bootstrap, the world’s most popular framework for building responsive, mobile-first sites, with jsDelivr and a template starter page.</p>
-             <div class="btn btn-primary">Popular Post</div>
+
+
+            <div class="post">
+             <h3>{{$post->title}}</h3>
+             <p>{{$post->body}}</p>
+                <p>{{$post->category['name']}}</p>
+
+             <a class="btn btn-primary" href="{{route('posts.show',$post->id)}}">Read More</a>
+                <hr>
+                @endforeach
         </div>
-            <hr>
-            <div class="post">
-                <h3>Post Title</h3>
-                <p>Get started with Bootstrap, the world’s most popular framework for building responsive, mobile-first sites, with jsDelivr and a template starter page.</p>
-                <div class="btn btn-primary">Popular Post</div>
-            </div>
-            <hr>
-            <div class="post">
-                <h3>Post Title</h3>
-                <p>Get started with Bootstrap, the world’s most popular framework for building responsive, mobile-first sites, with jsDelivr and a template starter page.</p>
-                <div class="btn btn-primary">Popular Post</div>
-            </div>
-            <hr>
-            <div class="post">
-                <h3>Post Title</h3>
-                <p>Get started with Bootstrap, the world’s most popular framework for building responsive, mobile-first sites, with jsDelivr and a template starter page.</p>
-                <div class="btn btn-primary">Popular Post</div>
-            </div>
-         </div>
 
 
-        <div class="col-md-4 " style="background-color:lightblue">
-        <h2>Sidebar</h2>
-        </div>
+
+{{--        <div class="col-md-4 " style="background-color:lightblue">--}}
+{{--        <h2>Sidebar</h2>--}}
+{{--        </div>--}}
     </div>
 
 @endsection

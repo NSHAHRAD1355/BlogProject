@@ -29,15 +29,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+{{--                <li class="nav-item">--}}
+{{--                    <a class="nav-link active" aria-current="page" href="#">Home</a>--}}
+{{--                </li>--}}
                 <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    <a class="nav-link active" aria-current="page" href="{{url('homepage')}}">Home</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/about">About</a>
+                    <a class="nav-link" href="{{url('about')}}">About</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/contact">Contact</a>
+                    <a class="nav-link" href="{{url('contact')}}">Contact</a>
                 </li>
+
+
+
+
 
 
             </ul>
@@ -62,6 +69,18 @@
 
     </div>
 </nav>
+<div class="container">
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <span class="navbar-text" >
+    Last posted blog: {{ $lastPostedBlog ?? ''}}<br>
+    Total Blogs: {{ $count ?? ''}}
+</span>
+
+        </div>
+    </div>
+</div>
+
 
 <div class="container">
     @yield('content')

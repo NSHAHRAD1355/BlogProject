@@ -7,29 +7,48 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Post;
+use App\Category;
+use App\Tag;
 
 class PostController extends Controller
+
 {
+    public function __construct() {
+//        $this->middleware('auth', ['only' => ['create', 'edit','']]);
+        $this->middleware('auth', ['except' => ['index', 'show']]);
+    }
+
+
+
     public function index(){
         $posts = Post::paginate(5);
+
         return view('posts.index',compact("posts"));
 
     }
 
     public function create(){
-        return view('posts.create');
+        $categories = Category::all()->pluck('name', 'id');
+        $tags= Tag::all()->pluck('name','id');
+        return view('posts.create' ,compact("categories","tags"));
 
     }
 
     public function store(PostRequest $request){
-        $formData = $request->all();
-        Post::create($formData);
+//        $formData = $request->all();
+//        Post::create($formData);
+
+        $category = Category::findOrFail($request->category_id);
+        $post = new Post($request->all());
+        $post->category()->associate($category)->save();
+        $post->tags()->sync($request->tags);
         return redirect('posts');
     }
 
 
-    public function show($post){
-        $post = Post::find($post);
+    public function show( Post $post){
+//        $post = Post::find($post);
+
         return view('posts.show',compact('post'));
     }
 

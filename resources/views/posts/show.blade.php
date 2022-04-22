@@ -6,6 +6,16 @@
         <div class="col-md-8">
             <h1>{{$post->title}}</h1>
             <p class="lead">{{$post->body}}</p>
+            <p class="lead">{{$post->category_id}}</p>
+            <p class="lead">{{$post->category['name']}}</p>
+            <p class="lead">
+            <td>
+                @foreach($post->tags as $tag)
+                    {{$tag->name}}
+                @endforeach
+
+            </td>
+            </p>
             <hr>
             <a href="{{route('posts.edit',$post->id)}}" class="btn btn-primary btn-block" >Edit</a>
 
